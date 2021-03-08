@@ -1,2 +1,1 @@
-# guacamole-calvo_nazabal
-Desafíos CoderHouse React.Js
+# Desafíos CoderHouse React.Js

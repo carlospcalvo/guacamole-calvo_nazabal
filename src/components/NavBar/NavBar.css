@@ -1,0 +1,31 @@
+#navbar, #inicio { 
+    background-color: #c0392b; 
+    color:rgb(255, 255, 255);
+    vertical-align: middle;
+}
+  
+#basic-navbar-nav {
+    vertical-align: middle;
+    align-items: center;
+}
+
+#nav-right{
+    justify-content: space-between;
+}
+
+#navbar-search{
+    flex-wrap: nowrap;
+    margin-right: 10px;
+}
+
+a, .navbar-nav, .navbar-light .nav-link {
+    color:rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-transform: uppercase;
+    font-size: small;
+    text-decoration: none;
+    justify-content: space-evenly;
+  }
+
