@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {FaSearch} from 'react-icons/fa'
 import './NavBar.css'
 import CartWidget from '../CartWidget/CartWidget'
 
@@ -29,7 +29,9 @@ const NavBar = () => (
       <Nav id='nav-right'>
         <Form id='navbar-search' inline>
           <FormControl type="text" size="sm" placeholder="Buscar..." className="mr-sm-2" />
-          <Button size="sm" variant="light">Buscar</Button>       
+          <Button size="sm" variant="light">
+            <FaSearch style={{color: '#c0392b'}}/>  
+          </Button>       
         </Form>
         <CartWidget backgroundColor='#c0392b' borderColor='#c0392b'/> 
       </Nav>      

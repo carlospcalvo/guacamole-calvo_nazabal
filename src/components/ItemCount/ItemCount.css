@@ -9,12 +9,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-top: 0.5rem;
+    margin-top: 0.01rem;
 }
 
 .number{
     text-align: center;
-    width: 10rem;
+    width: 7.5rem;
     outline: none;
     border: none;
     cursor: default;
@@ -23,38 +23,42 @@
 .ItemCountDecreaseBtn{
     background:#c0392b;
     color: white;
-    height: 2rem;
-    min-width: 2rem; 
+    height: 1.5rem;
+    min-width: 1.5rem; 
     outline: none;
     border: none;
     align-content: space-around;
     /* border-radius: 0.2rem; */
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
 }
 
 .ItemCountIncreaseBtn{
     background:#c0392b;
     color: white;
-    height: 2rem;
-    min-width: 2rem; 
+    height: 1.5rem;
+    min-width: 1.5rem; 
     outline: none;
     border: none;
     align-content: space-around;
     /* border-radius: 0.2rem; */
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
 }
 
 .ItemCountSubmit{
-    display: block;
+    display: flex;
     background: #e25a00;
     margin: auto;
-    margin-top: 0.75rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    height: 1.5rem;
     width: 100%;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     outline: none;
     border: none;
     color: white;
-    border-radius: 0.8rem;
+    border-radius: 0.6rem;
 }
 
 .ItemCountSubmit:hover{

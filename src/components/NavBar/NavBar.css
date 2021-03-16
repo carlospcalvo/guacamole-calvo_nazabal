@@ -15,7 +15,7 @@
 
 #navbar-search{
     flex-wrap: nowrap;
-    margin-right: 10px;
+    margin-right: 1rem;
 }
 
 a, .navbar-nav, .navbar-light .nav-link {

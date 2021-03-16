@@ -1,12 +1,12 @@
-import ItemCard from '../ItemCard/ItemCard'
+import ItemList from '../ItemList/ItemList'
+import './ItemListContainer.css'
 
 const ItemListContainer = ({greeting}) => {     
     return(
-        <>
-            <h4 style={{display: "flex", margin: '.5rem', justifyContent: "space-around", textAlign: "center"}}>{greeting}</h4>
-            <ItemCard/>
-        </>
-        
+        <div className= "itemListContainer">
+            <h4 className="greeting">{greeting}</h4>
+            <ItemList className='ItemList'/>
+        </div>        
     )
 }
 

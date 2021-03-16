@@ -1,8 +1,7 @@
-import logo from './images/guacamole-logo.png';
-import './App.css';
 import NavBar from './components/NavBar/NavBar'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
-
+import logo from './images/guacamole-logo.png';
+import './App.css';
 
 function App() {
   return (

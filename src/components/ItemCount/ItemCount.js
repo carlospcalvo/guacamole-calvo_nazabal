@@ -13,7 +13,7 @@ const ItemCount = ({stock, initial, onAdd}) => {
 
     const addUnits = (e) => {
         e.preventDefault()
-        if(finalValue >= 0){
+        if(finalValue < stock){
             setFinalValue(finalValue + 1) 
         }        
     }
@@ -26,6 +26,8 @@ const ItemCount = ({stock, initial, onAdd}) => {
             e.preventDefault()
         }
     }
+
+    console.log(`stock: `,stock)
 
     return (
         <>

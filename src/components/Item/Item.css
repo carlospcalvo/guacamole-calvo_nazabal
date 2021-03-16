@@ -1,0 +1,49 @@
+.card.ItemContainer{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 13.5rem;
+    background: white;
+    overflow: hidden;
+    border-radius: 1.125rem;
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ItemImage{
+    margin-bottom: -1.5rem;
+}
+
+.card-body.ItemBody{
+    padding-left: .65rem;
+    padding-right: .65rem;
+    padding-bottom: .65rem;
+}
+
+.card-title.ItemTitle{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-top: 0.25rem;
+    margin-left: .375rem;
+    margin-right: .375rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.card-subtitle.ItemDescription{
+    margin: .5625rem;
+    text-align: center;
+    font-size: .75rem;
+    color:gray;
+}
+
+.card-title.ItemPrice{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1rem;
+}
