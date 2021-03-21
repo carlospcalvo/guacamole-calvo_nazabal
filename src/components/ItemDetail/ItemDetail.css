@@ -1,0 +1,37 @@
+.DetailsContainer{
+    display: flex;
+    flex: 1 1 auto;
+}
+
+.ItemDetailImage{
+    justify-self: flex-start;
+    /* max-width: 10rem; */
+    max-height: 40rem;
+
+}
+
+.ItemDetailSizes{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn.btn-light{
+    border-radius: 2rem;
+}
+
+.ItemDetailCart{
+    display: flex;
+    flex-direction: row;
+}
+
+/* #SizeBtnGrp{
+    margin-top: .5rem;
+} */
+
+.SizeBtnGroup{
+    margin-top: .5rem;
+}
+
+#ItemDetailCartBtn{
+    justify-content: flex-start;
+}

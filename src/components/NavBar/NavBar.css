@@ -27,5 +27,17 @@ a, .navbar-nav, .navbar-light .nav-link {
     font-size: small;
     text-decoration: none;
     justify-content: space-evenly;
-  }
+}
+
+/* .NavDropDown{
+    background-color: #c0392b; 
+    /* color:rgb(255, 255, 255); 
+} */
+
+div.dropdown-menu.show {
+    background-color: #c0392b;
+}
+a.dropdown-item {
+    color: white;  
+}
 
