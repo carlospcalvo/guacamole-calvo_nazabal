@@ -3,9 +3,11 @@ import {Toast} from 'react-bootstrap'
 import './ItemCount.css'
 
 const ItemCount = ({stock, initial, onAdd}) => {
+    //State Hooks
     const [finalValue, setFinalValue] = useState(initial);    
     const [ShowNoStockToast, setShowNoStockToast] = useState(false);
 
+    //Helpers
     const reduceUnits = (e) => {
         e.preventDefault()
         if(finalValue > 1){
@@ -34,7 +36,6 @@ const ItemCount = ({stock, initial, onAdd}) => {
         <>
             <form className="ItemCountContainer">
                 <div>
-                    {/* <h4 style={{display: "flex", fontSize: '.8rem', justifyContent: "center"}}>{stock > 0 ? `Stock disponible: ${stock} unidades` : 'No hay stock disponible'} </h4>  */}
                     <div className='ItemCountBtnContainer'>
                         <div style={{display: 'flex', flexDirection: 'row'}}>
                             <button className="ItemCountDecreaseBtn" onClick={(e) => reduceUnits(e)}>-</button>

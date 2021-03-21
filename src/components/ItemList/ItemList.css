@@ -1,6 +1,8 @@
 .itemList{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: center;
     padding-right: 2rem;
+    max-width: 70rem;
 }

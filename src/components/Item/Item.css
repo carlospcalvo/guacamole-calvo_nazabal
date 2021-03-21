@@ -11,6 +11,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.card.ItemContainer:hover{ 
+    box-shadow: 1px 8px 20px grey;
+ }
+
 .ItemImage{
     margin-bottom: -1.5rem;
 }
@@ -30,13 +34,18 @@
     margin-left: .375rem;
     margin-right: .375rem;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    text-transform: none;
+    text-decoration: none;
+    color: black;
 }
 
 .card-subtitle.ItemDescription{
     margin: .5625rem;
     text-align: center;
     font-size: .75rem;
+    text-transform: none;
+    text-decoration: none;
     color:gray;
 }
 
@@ -46,4 +55,18 @@
     text-align: center;
     font-weight: 500;
     font-size: 1rem;
+    text-transform: none;
+    text-decoration: none;
+    color: black;
 }
+
+a.ItemContainer{
+    text-decoration: none;
+    border-bottom-style: none;
+}
+
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+  }

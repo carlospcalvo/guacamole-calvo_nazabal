@@ -1,10 +1,7 @@
 import Skeleton from 'react-loading-skeleton'
 import {Card, ListGroup, ButtonGroup} from 'react-bootstrap'
 
-
 const ItemDetailSkeleton = () => {
-
-
     return (
         <>
             <Card>
@@ -51,7 +48,6 @@ const ItemDetailSkeleton = () => {
             </Card>
         </>
     )
-
 }
 
 export default ItemDetailSkeleton

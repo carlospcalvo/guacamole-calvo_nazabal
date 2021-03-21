@@ -1,21 +1,22 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import {FaSearch} from 'react-icons/fa'
-import './NavBar.css'
 import CartWidget from '../CartWidget/CartWidget'
+import './NavBar.css'
+
 
 const NavBar = () => (
   <Navbar id='navbar' expand="xl" variant="dark">
-    <Nav.Link id="inicio" href="/home">Inicio</Nav.Link>
+    <Nav.Link id="inicio" href="/">Inicio</Nav.Link>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
         <NavDropdown className="NavDropDown" title="Productos" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/productos">Todos los productos</NavDropdown.Item>
-          <NavDropdown.Item href="/nenas">Nenas</NavDropdown.Item>
-          <NavDropdown.Item href="/pre-teens">Pre Teens</NavDropdown.Item>
-          <NavDropdown.Item href="/chiquititas">Chiquititas</NavDropdown.Item>
-          <NavDropdown.Item href="/varones">Varones</NavDropdown.Item>
+          <NavDropdown.Item href="/">Todos los productos</NavDropdown.Item>
+          <NavDropdown.Item href="/category/nenas">Nenas</NavDropdown.Item>
+          <NavDropdown.Item href="/category/pre-teens">Pre Teens</NavDropdown.Item>
+          <NavDropdown.Item href="/category/chiquititas">Chiquititas</NavDropdown.Item>
+          <NavDropdown.Item href="/category/varones">Varones</NavDropdown.Item>
           <NavDropdown.Item href="/sale">Sale</NavDropdown.Item>
         </NavDropdown>
         <Nav.Link href="/sale">Sale</Nav.Link>
@@ -38,8 +39,6 @@ const NavBar = () => (
     </Navbar.Collapse>
   </Navbar>
 )
-
-
 
 export default NavBar
 

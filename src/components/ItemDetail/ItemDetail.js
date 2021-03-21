@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import {Image, Card, ListGroup, ButtonGroup, Button} from 'react-bootstrap'
+import {useState} from 'react'
+import {Image, Card, ListGroup} from 'react-bootstrap'
 import ItemStockDetail from '../ItemStockDetail/ItemStockDetail'
 import ItemCount from '../ItemCount/ItemCount'
 import './ItemDetail.css'
@@ -47,20 +47,7 @@ const ItemDetail = (props) => {
                                 <ListGroup.Item>Descripción: {description}</ListGroup.Item>
                                 <ListGroup.Item>Materiales: {materials}</ListGroup.Item>
                                 <ListGroup.Item className="ItemDetailSizes">
-
-                                    <ItemStockDetail onClick={selectSize} stock={stockActual} sizes={sizes} />
-
-                                   {/*  <div>
-                                        {stockActual !== -1 ? `Stock disponible: ${stockActual}` : null}
-                                    </div>
-                                    <div className="SizeBtnGroup">
-                                        <span>Talle: </span>
-                                        <ButtonGroup id="SizeBtnGrp">
-                                            {sizes.map((x,i) => {
-                                                return <Button onClick={selectSize} key={i} value={x} variant="light">{x}</Button>
-                                            })}
-                                        </ButtonGroup>
-                                    </div>   */}                                  
+                                    <ItemStockDetail onClick={selectSize} stock={stockActual} sizes={sizes} />                                 
                                 </ListGroup.Item>
                                 <ListGroup.Item id="ItemDetailCartBtn">
                                     <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
