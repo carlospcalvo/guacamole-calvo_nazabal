@@ -1,31 +1,31 @@
 import React from 'react';
 import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 import {FaSearch} from 'react-icons/fa'
 import CartWidget from '../CartWidget/CartWidget'
 import './NavBar.css'
 
-
 const NavBar = () => (
   <Navbar id='navbar' expand="xl" variant="dark">
-    <Nav.Link id="inicio" href="/">Inicio</Nav.Link>
+    <Nav.Link as={Link} id="inicio" to="/">Inicio</Nav.Link>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
         <NavDropdown className="NavDropDown" title="Productos" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/">Todos los productos</NavDropdown.Item>
-          <NavDropdown.Item href="/category/nenas">Nenas</NavDropdown.Item>
-          <NavDropdown.Item href="/category/pre-teens">Pre Teens</NavDropdown.Item>
-          <NavDropdown.Item href="/category/chiquititas">Chiquititas</NavDropdown.Item>
-          <NavDropdown.Item href="/category/varones">Varones</NavDropdown.Item>
-          <NavDropdown.Item href="/sale">Sale</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/">Todos los productos</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/category/nenas">Nenas</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/category/pre-teens">Pre Teens</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/category/chiquititas">Chiquititas</NavDropdown.Item>
+          {/* TODAVIA NO HAY MATERIAL <NavDropdown.Item as={Link} to="/category/varones">Varones</NavDropdown.Item> */}
+          <NavDropdown.Item as={Link} to="/sale">Sale</NavDropdown.Item>
         </NavDropdown>
-        <Nav.Link href="/sale">Sale</Nav.Link>
-        <Nav.Link href="/ayuda">Cómo comprar</Nav.Link>
-        <Nav.Link href="/tabla-de-talles">Tabla de talles</Nav.Link>
-        <Nav.Link href="/preguntas-frecuentes">Preguntas Frecuentes</Nav.Link>
-        <Nav.Link href="/ventas-mayoristas">Ventas Mayoristas</Nav.Link>        
-        <Nav.Link href="/quienes-somos">Quiénes somos</Nav.Link>
-        <Nav.Link href="/contacto">Contacto</Nav.Link>
+        <Nav.Link as={Link} to="/sale">Sale</Nav.Link>
+        <Nav.Link as={Link} to="/ayuda">Cómo comprar</Nav.Link>
+        <Nav.Link as={Link} to="/tabla-de-talles">Tabla de talles</Nav.Link>
+        <Nav.Link as={Link} to="/preguntas-frecuentes">Preguntas Frecuentes</Nav.Link>
+        <Nav.Link as={Link} to="/ventas-mayoristas">Ventas Mayoristas</Nav.Link>        
+        <Nav.Link as={Link} to="/quienes-somos">Quiénes somos</Nav.Link>
+        <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
       </Nav>
       <Nav id='nav-right'>
         <Form id='navbar-search' inline>

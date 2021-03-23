@@ -1,8 +1,8 @@
-# Entrgea Intermedia ReactJs
+# CoderHouse - Entrega Intermedia React.js
 
-Front-end de un sitio web E-commerce de ropa para chicos. Construido principalmente con React.js
+Front-end de un e-commerce de ropa para chicos. 
 
-## Front-End construido con 
+## Construido con 
 
 * [React](https://reactjs.org/) 
 * [React-Bootstrap](https://react-bootstrap.github.io/)  

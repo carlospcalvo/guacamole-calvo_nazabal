@@ -41,3 +41,6 @@ a.dropdown-item {
     color: white;  
 }
 
+.dropdown-item:active{
+    background-color: #75231a!important;
+}

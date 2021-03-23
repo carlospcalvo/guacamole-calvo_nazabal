@@ -6,10 +6,23 @@ import ItemDetailSkeleton from '../ItemDetailSkeleton/ItemDetailSkeleton'
 
 
 const ItemDetailContainer = () => {
+    //params
     let {id} = useParams()
-    console.log(id)
+    
+    //State Hooks
     const [item, setItem] = useState([]);
 
+    //Effect Hooks
+    useEffect(() => {
+        getItem()
+        .then((data) => {
+            let filteredData = id ? data.filter((element) => element.id === parseInt(id)) : data
+            setItem(filteredData)
+        })
+        .catch((err) => console.log('error: ', err))
+    }, [id]);
+
+    //Helpers
     const getItem = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -54,15 +67,6 @@ const ItemDetailContainer = () => {
             }, 2000);      
         })
     }
-
-    useEffect(() => {
-        getItem()
-        .then((data) => {
-            let filteredData = id ? data.filter((element) => element.id === parseInt(id)) : data
-            setItem(filteredData)
-        })
-        .catch((err) => console.log('error: ', err))
-    }, [id]);
 
     return (
         <div className="ItemDetailContainer">

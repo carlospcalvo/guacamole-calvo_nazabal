@@ -4,5 +4,6 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-right: 2rem;
+    margin-top: 1rem;
     max-width: 70rem;
 }

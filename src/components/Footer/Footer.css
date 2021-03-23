@@ -1,0 +1,40 @@
+footer{
+    display: flex;
+    justify-content: stretch;
+    vertical-align: middle;
+    background-color: #75231a;
+    color: white;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.right-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+/* footer > svg{
+    margin-top: .15rem;
+    margin-right: .5rem;
+} */
+
+#fb-link, #ig-link, #mail-link{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    text-transform: none
+}

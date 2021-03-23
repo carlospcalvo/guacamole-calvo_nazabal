@@ -7,7 +7,7 @@
 
 .greeting{
     display: flex; 
-    margin: .375rem; 
+    margin-top: .5rem; 
     justify-content: space-around; 
     text-align: center;
 }

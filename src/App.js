@@ -2,11 +2,12 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemList from './components/ItemList/ItemList'
-import './styles/App.css';
-import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
-
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
+import Footer from './components/Footer/Footer'
+import './styles/App.css'
 
 const App = () => {
+  console.log("[App] Render")
   return (
     <>
         <Router>
@@ -45,6 +46,7 @@ const App = () => {
               </Route>
             </Switch>
           </div>
+          <Footer/>
         </Router> 
     </>
   );

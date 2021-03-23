@@ -7,11 +7,12 @@ import './ItemList.css'
 const ItemList = () => {
     //params
     let {categoryId} = useParams()
+    
     //State Hooks
     const [items, setItems] = useState([]);
-
     //Effect Hooks
     useEffect(() => {
+        setItems([])
         getItems()
         .then((data) => {
             let filteredData = categoryId ? data.filter((element) => element.category === categoryId) : data
