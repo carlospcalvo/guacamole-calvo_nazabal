@@ -7,7 +7,6 @@ import Footer from './components/Footer/Footer'
 import './styles/App.css'
 
 const App = () => {
-  console.log("[App] Render")
   return (
     <>
         <Router>
