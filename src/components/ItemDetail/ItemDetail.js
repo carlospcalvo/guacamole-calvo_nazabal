@@ -8,15 +8,13 @@ const ItemDetail = (props) => {
     //props
     const {title, description, price, pictureUrl, sizes, stock_per_size, materials} = props.item[0]
     //context for images
-    const requestImageFile = require.context('../../images/items', true, /.jpg$/);
-    const imgUrl = requestImageFile(`./${pictureUrl}.jpg`).default
+    const requestImageFile = require.context('../../images/items', true, /.jpeg$/);
+    const imgUrl = requestImageFile(`./${pictureUrl}.jpeg`).default
     
     //State Hooks
     const [stockActual, setStockActual] = useState(-1);
     const [SelectedSize, setSelectedSize] = useState(0);
     const [StockPerSize, setStockPerSize] = useState(stock_per_size);
-    
-    //Effect hooks
 
     //Helpers
     const restarStock = (e, pedido) => {
