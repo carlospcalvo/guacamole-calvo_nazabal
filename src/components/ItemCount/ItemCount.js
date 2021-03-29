@@ -6,6 +6,7 @@ const ItemCount = ({stock, initial, onAdd}) => {
     //State Hooks
     const [finalValue, setFinalValue] = useState(initial);    
     const [ShowNoStockToast, setShowNoStockToast] = useState(false);
+    const [ToastMessage, setToastMessage] = useState("Seleccione un talle");
 
     //Helpers
     const reduceUnits = (e) => {
@@ -23,11 +24,14 @@ const ItemCount = ({stock, initial, onAdd}) => {
     }
 
     const submitClickHandler = (e) => {
+        e.preventDefault()
         if(stock > 0){
             onAdd(e, finalValue)
             setFinalValue(initial)
+        } else if(stock === 0){
+            setToastMessage("No hay stock disponible, lo sentimos!")
+            setShowNoStockToast(true)
         } else {
-            e.preventDefault()
             setShowNoStockToast(true)
         }
     }
@@ -46,7 +50,7 @@ const ItemCount = ({stock, initial, onAdd}) => {
                     </div>                                    
                 </div>
                 <Toast id="NoStockToast" onClose={() => setShowNoStockToast(false)} show={ShowNoStockToast} delay={3000} autohide>
-                    <Toast.Body>No hay stock disponible, lo sentimos!</Toast.Body>
+                    <Toast.Body>{ToastMessage}</Toast.Body>
                 </Toast>
             </form>
         </>

@@ -1,5 +1,4 @@
 import {ButtonGroup, Button} from 'react-bootstrap'
-import './ItemStockDetail.css'
 
 const ItemStockDetail = ({onClick, stock, sizes}) => {
     return (
@@ -10,7 +9,7 @@ const ItemStockDetail = ({onClick, stock, sizes}) => {
             <div className="SizeBtnGroup">
                 <span>Talle: </span>
                 <ButtonGroup id="SizeBtnGrp">
-                    {sizes.map((x,i) => <Button onClick={(e => onClick(e))} key={i} value={x} variant="light">{x}</Button> )}
+                    {sizes.map((x,i) => <Button onClick={(e => onClick(e))} key={i} value={x} variant="warning">{x}</Button> )}
                 </ButtonGroup>
             </div>
         </>

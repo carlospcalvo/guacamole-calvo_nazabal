@@ -39,6 +39,9 @@ const App = () => {
             <Route path="/contacto">
               <h1>Contacto</h1>
             </Route>
+            <Route exact path="/cart">
+              <h1>Cart</h1>
+            </Route>
             <Route exact path="/"> 
               <ItemListContainer greeting='¡COMPRÁ ONLINE Y RECIBÍ TU PRODUCTO DONDE QUIERAS!'/>
             </Route>

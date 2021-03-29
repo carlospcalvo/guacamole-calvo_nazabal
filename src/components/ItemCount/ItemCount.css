@@ -78,7 +78,12 @@
     margin-left: 1rem;
     text-align: center;
     background-color: #FEA8A8;
-    /* color: white; */
     border-radius: 1rem;
     font-style: oblique;
+}
+
+#ItemDetailGoToCartBtn{
+    border-radius: 0.6rem;
+    font-weight: 500;
+    text-transform: none;
 }

@@ -1,5 +1,6 @@
 import {useState} from 'react'
-import {Image, Card, ListGroup} from 'react-bootstrap'
+import {Image, Card, ListGroup, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import ItemStockDetail from '../ItemStockDetail/ItemStockDetail'
 import ItemCount from '../ItemCount/ItemCount'
 import './ItemDetail.css'
@@ -15,6 +16,7 @@ const ItemDetail = (props) => {
     const [stockActual, setStockActual] = useState(-1);
     const [SelectedSize, setSelectedSize] = useState(0);
     const [StockPerSize, setStockPerSize] = useState(stock_per_size);
+    const [CounterComponent, setCounterComponent] = useState("ItemCount");
 
     //Helpers
     const restarStock = (e, pedido) => {
@@ -24,12 +26,24 @@ const ItemDetail = (props) => {
             let aux = {...StockPerSize}
             aux[SelectedSize] = stockActual - pedido
             setStockPerSize(aux)
+            setCounterComponent("Add to cart")
         }
     }
     
     const selectSize = (e) => {
         setSelectedSize(e.target.value)
         setStockActual(StockPerSize[e.target.value])
+    }
+
+    //Components
+
+    const Counter = () => {
+        if(CounterComponent === 'ItemCount'){
+            return <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
+        } else {
+            return <Button as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Terminar mi compra</Button>
+        }
+
     }
 
     return (            
@@ -48,7 +62,7 @@ const ItemDetail = (props) => {
                                     <ItemStockDetail onClick={selectSize} stock={stockActual} sizes={sizes} />                                 
                                 </ListGroup.Item>
                                 <ListGroup.Item id="ItemDetailCartBtn">
-                                    <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
+                                    <Counter/>
                                 </ListGroup.Item>    
                             </ListGroup>                                
                         </Card.Body>                            

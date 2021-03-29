@@ -15,7 +15,7 @@
     flex-direction: column;
 }
 
-.btn.btn-light{
+.btn.btn-warning{
     border-radius: 2rem;
 }
 
@@ -23,10 +23,6 @@
     display: flex;
     flex-direction: row;
 }
-
-/* #SizeBtnGrp{
-    margin-top: .5rem;
-} */
 
 .SizeBtnGroup{
     margin-top: .5rem;
