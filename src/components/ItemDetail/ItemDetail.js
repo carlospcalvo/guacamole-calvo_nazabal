@@ -38,8 +38,13 @@ const ItemDetail = (props) => {
     //Components
 
     const Counter = () => {
+
         if(CounterComponent === 'ItemCount'){
-            return <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
+            if(parseInt(stockActual) === 0){
+                return <b>No hay stock disponible :(</b>
+            } else {
+                return parseInt(SelectedSize) === 0 ? null : <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
+            }            
         } else {
             return <Button as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Terminar mi compra</Button>
         }
