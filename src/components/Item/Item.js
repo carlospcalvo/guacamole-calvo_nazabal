@@ -7,7 +7,7 @@ const Item = (props) => {
     const {id, title, description, price, pictureUrl} = props.item
     const requestImageFile = require.context('../../images/items', true, /.jpeg$/);
     const imgUrl = requestImageFile(`./${pictureUrl}.jpeg`).default
-
+    
     return (
         <>
             <Link to={`/item/${id}`} className='ItemContainer' >

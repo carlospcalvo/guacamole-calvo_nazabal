@@ -84,6 +84,7 @@ const ItemList = () => {
                             materials: "Algodón"
                         },
                         {
+                            id : 6,
                             category: "pre-teens",
                             title : "Campera Rosa",
                             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rutrum.",

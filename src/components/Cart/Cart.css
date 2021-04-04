@@ -1,0 +1,37 @@
+.CartListItemContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.CartListItem{
+    display: flex;
+    /* flex-direction: column; 
+    min-width: 30rem;*/
+    justify-content: center;
+}
+
+.CartListItemDetail{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.CartListItemTotal{
+    justify-content: center;
+    min-width: 30rem;
+}
+
+.CartListItemTotalLeft{
+    min-width: 21.1rem;
+    text-align: right;
+}
+
+.CartListItemTotalRight{
+    min-width: 7rem;
+} 
+
+.CartListItemDeleteBtn{
+    width: 3rem;
+    padding: .5rem;
+    text-align: center;
+}
+

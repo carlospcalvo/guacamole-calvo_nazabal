@@ -8,7 +8,7 @@ import ItemDetailSkeleton from '../ItemDetailSkeleton/ItemDetailSkeleton'
 const ItemDetailContainer = () => {
     //params
     let {id} = useParams()
-    
+
     //State Hooks
     const [item, setItem] = useState([]);
 

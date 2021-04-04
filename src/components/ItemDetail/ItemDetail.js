@@ -3,59 +3,68 @@ import {Image, Card, ListGroup, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import ItemStockDetail from '../ItemStockDetail/ItemStockDetail'
 import ItemCount from '../ItemCount/ItemCount'
+import {useCartContext} from '../../context/cartContext'
 import './ItemDetail.css'
 
 const ItemDetail = (props) => {
     //props
-    const {title, description, price, pictureUrl, sizes, stock_per_size, materials} = props.item[0]
-    //context for images
+    const {id, title, description, price, pictureUrl, sizes, stock_per_size, materials} = props.item[0]
+    //images
     const requestImageFile = require.context('../../images/items', true, /.jpeg$/);
     const imgUrl = requestImageFile(`./${pictureUrl}.jpeg`).default
     
+    //Context
+    const cartContext = useCartContext()
+
     //State Hooks
     const [stockActual, setStockActual] = useState(-1);
-    const [SelectedSize, setSelectedSize] = useState(0);
-    const [StockPerSize, setStockPerSize] = useState(stock_per_size);
-    const [CounterComponent, setCounterComponent] = useState("ItemCount");
+    const [selectedSize, setSelectedSize] = useState(0);
+    const [stockPerSize, setStockPerSize] = useState(stock_per_size);
+    const [hideCartBtn, setHideCartBtn] = useState(true);
 
     //Helpers
     const restarStock = (e, pedido) => {
         e.preventDefault()
         if(stockActual >= pedido){
             setStockActual((stockActual) => stockActual - pedido)
-            let aux = {...StockPerSize}
-            aux[SelectedSize] = stockActual - pedido
+            let aux = {...stockPerSize}
+            aux[selectedSize] = stockActual - pedido
             setStockPerSize(aux)
-            setCounterComponent("Add to cart")
+            setHideCartBtn(false)
+            cartContext.addToCart({
+                item: {
+                    id, 
+                    title,
+                    description,
+                    price,
+                    size: selectedSize,
+                    pictureUrl
+                }, 
+                quantity: pedido
+            })
         }
     }
     
     const selectSize = (e) => {
         setSelectedSize(e.target.value)
-        setStockActual(StockPerSize[e.target.value])
+        setStockActual(stockPerSize[e.target.value])
     }
-
-    //Components
-
+    
     const Counter = () => {
-
-        if(CounterComponent === 'ItemCount'){
-            if(parseInt(stockActual) === 0){
-                return <b>No hay stock disponible :(</b>
-            } else {
-                return parseInt(SelectedSize) === 0 ? null : <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
-            }            
+        if(parseInt(stockActual) === 0){
+            return <b>No hay stock disponible :(</b>
         } else {
-            return <Button as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Terminar mi compra</Button>
-        }
-
+            return parseInt(selectedSize) === 0 ? null : <ItemCount stock={stockActual} initial={1} onAdd={restarStock}/>
+        }  
     }
 
     return (            
         <>
             <Card key={pictureUrl}>
                 <div className="DetailsContainer">
-                    <Image className="ItemDetailImage" src={imgUrl} alt={title} thumbnail />
+                    <div className="ItemDetailImageContainer">
+                        <Image className="ItemDetailImage" src={imgUrl} alt={title} thumbnail />
+                    </div>                    
                     <div className="Details">
                         <Card.Body>
                             <Card.Header><h1>{title}</h1></Card.Header>
@@ -68,6 +77,7 @@ const ItemDetail = (props) => {
                                 </ListGroup.Item>
                                 <ListGroup.Item id="ItemDetailCartBtn">
                                     <Counter/>
+                                    <Button hidden={hideCartBtn} as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Terminar mi compra</Button>
                                 </ListGroup.Item>    
                             </ListGroup>                                
                         </Card.Body>                            
