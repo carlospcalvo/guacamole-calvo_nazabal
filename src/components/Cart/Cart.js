@@ -1,7 +1,9 @@
-import {useCartContext} from '../../context/cartContext'
 import {ListGroup, Container, Row, Col, Table, Card, Media, Button} from 'react-bootstrap'
 import {FaTrash, FaTimes} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
+import {useCartContext} from '../../context/cartContext'
 import './Cart.css'
+import emptyCart from '../../images/empty-cart.png'
 
 const Cart = () => {
     const { cart, removeFromCart, clearCart, cartSize } = useCartContext()
@@ -9,7 +11,6 @@ const Cart = () => {
 
     const removeItem = (e) => {
         if(window.confirm("El item será eliminado del carrito.")){
-           console.log(e)
             if(e.target.nodeName === "path"){
                 let { id, size } = cart[e.target.nearestViewportElement.id]["item"]
                 removeFromCart(id, size) 
@@ -100,7 +101,12 @@ const Cart = () => {
                 </Row>
             </Container>
             : 
-            <h3>Aún no hay items en el carrito!</h3>  
+            <div className="EmptyCartDiv">
+                <img src={emptyCart} alt="Your cart is empty."/>
+                <h3 style={{margin: "3rem"}}>Aún no hay items en el carrito!</h3>  
+                <Button as={Link} to="/" variant="outline-danger" id="EmptyCartBtn" style={{maxWidth: "10rem", display:"flex", alignSelf: "center"}}>Ir al catálogo</Button>
+            </div>
+            
     )
 }
 

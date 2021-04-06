@@ -35,3 +35,26 @@
     text-align: center;
 }
 
+.EmptyCartDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#EmptyCartBtn{
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+#EmptyCartBtn:hover{
+    color: white;
+    background-color: #c0392b;
+}
+
+a:hover, a:visited, a:link, a:active{
+    text-decoration: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    /* color:black */
+}

@@ -44,3 +44,10 @@ a.dropdown-item {
 .dropdown-item:active{
     background-color: #75231a!important;
 }
+
+#CartBadge{
+    float: right;
+    border-radius: 3rem;
+    margin-left: 1rem;
+    margin-bottom: -3rem;
+}

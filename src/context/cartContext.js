@@ -5,7 +5,7 @@ export const CartContext = React.createContext([])
 export const CartContextProvider = ({children}) => {
     const [cart, setCart] = useState([])
 
-    const getItem = (id, size) => cart.find(item => item.id === id && item.size === size)
+    const getItem = (id, size) => cart.find(({item}) => item.id === id && item.size === size )
 
     const removeItem = (id, size) => setCart(cart.filter(({item}) => item.id !== id || item.size !== size ))
 
@@ -14,6 +14,7 @@ export const CartContextProvider = ({children}) => {
     const isInCart = (id, size) => id === undefined ? undefined : getItem(id, size) !== undefined
 
     const addItem = (obj) => {    
+        
         if(isInCart(obj.item.id, obj.item.size)){
             console.log("[CartContext] Item already exists in Cart")
             alert("El item ya fue agregado al carrito anteriormente")
