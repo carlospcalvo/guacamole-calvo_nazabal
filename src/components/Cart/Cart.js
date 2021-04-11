@@ -2,6 +2,7 @@ import {ListGroup, Container, Row, Col, Table, Card, Media, Button} from 'react-
 import {FaTrash, FaTimes} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {useCartContext} from '../../context/cartContext'
+import {getFirestore} from '../../config/firebase'
 import './Cart.css'
 import emptyCart from '../../images/empty-cart.png'
 
@@ -51,7 +52,7 @@ const Cart = () => {
                                             return (
                                                 <tr key={i}>
                                                     <td>
-                                                        <Media as="li" style={{minWidth:"25rem"}}>
+                                                        <Media as="li" style={{minWidth:"10rem"}}>
                                                             <img width={64} height={64} className="mr-3" src={imgUrl} alt={x.item.title}/>
                                                             <Media.Body>
                                                             <h5>{x.item.title}</h5>
@@ -85,7 +86,7 @@ const Cart = () => {
                         </Table>
                     </Col>
                     <Col md="auto">
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ minWidth: '18rem' }}>
                         <Card.Header style={{textAlign: "center", fontWeight: "500"}}>Resumen de compra</Card.Header>
                         <ListGroup variant="flush">
                             <ListGroup.Item style={{textAlign: "right"}}>
@@ -97,6 +98,7 @@ const Cart = () => {
                             </ListGroup.Item>
                         </ListGroup>
                         </Card>
+                        <Button as={Link} to="/checkout" variant="warning" style={{marginTop: "1rem"}} block>Iniciar la compra</Button>
                     </Col>
                 </Row>
             </Container>

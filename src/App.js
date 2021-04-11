@@ -4,6 +4,7 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
 import Footer from './components/Footer/Footer'
 import Cart from './components/Cart/Cart'
+import Checkout from './components/Checkout/Checkout'
 import {CartContextProvider} from './context/cartContext'
 import './styles/App.css'
 
@@ -41,6 +42,9 @@ const App = () => {
               </Route>
               <Route path="/contacto">
                 <h1>Contacto</h1>
+              </Route>
+              <Route exact path="/checkout">
+                <Checkout/>
               </Route>
               <Route exact path="/cart">
                 <Cart/>

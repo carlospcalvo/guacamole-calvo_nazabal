@@ -1,0 +1,19 @@
+.CheckoutFormContainer{
+    padding: 1rem;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#SelectProvince{ 
+    background-position: right calc(.5em + .5rem) center;
+}

@@ -77,7 +77,7 @@ const ItemDetail = (props) => {
                                 </ListGroup.Item>
                                 <ListGroup.Item id="ItemDetailCartBtn">
                                     <Counter/>
-                                    <Button hidden={hideCartBtn} as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Terminar mi compra</Button>
+                                    <Button hidden={hideCartBtn} as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Ir al carrito</Button>
                                 </ListGroup.Item>    
                             </ListGroup>                                
                         </Card.Body>                            
