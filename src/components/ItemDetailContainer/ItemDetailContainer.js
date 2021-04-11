@@ -32,8 +32,6 @@ const ItemDetailContainer = () => {
         } 
     }, [id]);
 
-    
-
     return (
         <div className="ItemDetailContainer">
             {item.length > 0 ? <ItemDetail item={item} /> : <ItemDetailSkeleton />}
