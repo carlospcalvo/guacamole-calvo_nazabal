@@ -1,5 +1,5 @@
-import {useState, useEffect} from 'react'
-import {Card, Form, Col, Button, ListGroup} from 'react-bootstrap'
+import {useState} from 'react'
+import {Card, Form, Col, Button} from 'react-bootstrap'
 import {Redirect} from 'react-router-dom'
 import {useCartContext} from '../../context/cartContext'
 import {getFirestore} from '../../config/firebase'
@@ -9,21 +9,13 @@ import './Checkout.css'
 
 const Checkout = () => {   
     //context
-    const { cart, cartSize, clearCart } = useCartContext()
+    const { cart, clearCart } = useCartContext()
 
     //State Hooks
     const [validated, setValidated] = useState(false);
     const [order, setOrder] = useState(undefined);
 
-    //useEffect - creacion de la orden ? render "gracias por tu compra" : render "Hubo un error al generar la orden"
-    /* useEffect(() => {
-        
-    }, [order]); */
-
     //HACER QUE AL GENERARSE UNA ORDEN DISMINUYA EL STOCK EN FIREBASE
-
-    //HACER UNA RUTA A LA QUE SE REDIRIJA EL USUARIO AL GENERARSE LA ORDEN PARA MOSTRAR EL CONTENIDO 
-    // '/order/:orderId'
 
     //AMPLIAR EL README, AGREGAR INSTALACION DE NODE Y DEL REPO
 
@@ -35,7 +27,7 @@ const Checkout = () => {
 
         if(form.checkValidity()){
             const newOrder = {
-                user: {
+                buyer: {
                     name: document.getElementById("formName").value + ' ' + document.getElementById("formSurname").value,
                     email: document.getElementById("formEmail").value,
                     phone: document.getElementById("formPhone").value,
@@ -174,7 +166,6 @@ const Checkout = () => {
                 :
                 <Redirect to={`/order/${order.id}`}/>
             }
-            
         </div>
     )
 }
