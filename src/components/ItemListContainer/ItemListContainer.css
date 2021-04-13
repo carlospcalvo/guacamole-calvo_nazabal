@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    font-family: 'Brandon Grotesque Regular', sans-serif;
 }
 
 .greeting{
@@ -10,4 +11,5 @@
     margin-top: .5rem; 
     justify-content: space-around; 
     text-align: center;
+    font-size: 2rem;
 }

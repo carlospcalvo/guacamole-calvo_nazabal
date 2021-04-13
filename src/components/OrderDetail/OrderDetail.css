@@ -1,0 +1,17 @@
+.Checkout{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#ReturnBtn{
+    color: #c0392b;
+    border-color: #c0392b;
+    max-width: 10rem;
+    justify-self: center;
+}
+
+#ReturnBtn:hover{
+    color: white;
+    background-color: #c0392b;
+}

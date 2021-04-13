@@ -23,7 +23,9 @@ export const CartContextProvider = ({children}) => {
         }
     }
     
-    const value = { cart, addToCart: addItem, isInCart, removeFromCart: removeItem, clearCart: clear, cartSize: cart.length }
+    const cartSubTotal = cart.reduce((runningTotal, order) => runningTotal + order.item.price * order.quantity , 0)
+
+    const value = { cart, addToCart: addItem, isInCart, removeFromCart: removeItem, clearCart: clear, cartSubTotal, cartSize: cart.length }
 
     return (
         <CartContext.Provider value={value}>

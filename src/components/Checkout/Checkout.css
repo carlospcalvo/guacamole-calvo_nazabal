@@ -14,6 +14,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-#SelectProvince{ 
+#formState{ 
     background-position: right calc(.5em + .5rem) center;
 }

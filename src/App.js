@@ -5,6 +5,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Footer from './components/Footer/Footer'
 import Cart from './components/Cart/Cart'
 import Checkout from './components/Checkout/Checkout'
+import OrderDetail from './components/OrderDetail/OrderDetail'
 import {CartContextProvider} from './context/cartContext'
 import './styles/App.css'
 
@@ -14,7 +15,7 @@ const App = () => {
       <CartContextProvider>
         <Router>
           <NavBar/>
-          <div id="main">
+          <section id="main">
             <Switch>
               <Route path="/item/:id">
                 <ItemDetailContainer /> 
@@ -43,6 +44,9 @@ const App = () => {
               <Route path="/contacto">
                 <h1>Contacto</h1>
               </Route>
+              <Route exact path="/order/:id">
+                <OrderDetail/>
+              </Route>
               <Route exact path="/checkout">
                 <Checkout/>
               </Route>
@@ -53,7 +57,7 @@ const App = () => {
                 <ItemListContainer greeting='¡COMPRÁ ONLINE Y RECIBÍ TU PRODUCTO DONDE QUIERAS!'/>
               </Route>
             </Switch>
-          </div>
+          </section>
           <Footer/>
         </Router> 
       </CartContextProvider>

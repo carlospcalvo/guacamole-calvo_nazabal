@@ -2,9 +2,9 @@ import {ListGroup, Container, Row, Col, Table, Card, Media, Button} from 'react-
 import {FaTrash, FaTimes} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {useCartContext} from '../../context/cartContext'
-import {getFirestore} from '../../config/firebase'
-import './Cart.css'
 import emptyCart from '../../images/empty-cart.png'
+import './Cart.css'
+
 
 const Cart = () => {
     const { cart, removeFromCart, clearCart, cartSize } = useCartContext()
@@ -89,12 +89,12 @@ const Cart = () => {
                     <Card style={{ minWidth: '18rem' }}>
                         <Card.Header style={{textAlign: "center", fontWeight: "500"}}>Resumen de compra</Card.Header>
                         <ListGroup variant="flush">
-                            <ListGroup.Item style={{textAlign: "right"}}>
-                                <p>Productos: ${total}</p>
-                                <span>Envío: $500</span>
+                            <ListGroup.Item>
+                                <p>Productos: <span style={{float: "right"}}> $ {total}</span></p>
+                                <span>Envío: <span style={{float: "right"}}> $ 500</span></span>
                             </ListGroup.Item>
-                            <ListGroup.Item style={{textAlign: "right", fontWeight: "500"}}>
-                                Total: $ {total + 500} 
+                            <ListGroup.Item style={{fontWeight: "500"}}>
+                                Total: <span style={{float: "right"}}> $ {total + 500} </span> 
                             </ListGroup.Item>
                         </ListGroup>
                         </Card>

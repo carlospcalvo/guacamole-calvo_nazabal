@@ -9,6 +9,9 @@ import './NavBar.css'
 const NavBar = () => {
   let {cartSize} = useCartContext()
 
+
+  //HACER EL NAVBAR DINAMICO CON UN JSON
+  
   return (
     <Navbar id='navbar' expand="xl" variant="dark">
       <Nav.Link as={Link} id="inicio" to="/">Inicio</Nav.Link>

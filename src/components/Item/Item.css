@@ -34,7 +34,7 @@
     margin-left: .375rem;
     margin-right: .375rem;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.25rem;
     text-transform: none;
     text-decoration: none;
     color: black;
@@ -43,7 +43,7 @@
 .card-subtitle.ItemDescription{
     margin: .5625rem;
     text-align: center;
-    font-size: .75rem;
+    font-size: 1rem;
     text-transform: none;
     text-decoration: none;
     color:gray;
@@ -54,7 +54,7 @@
     justify-content: center;
     text-align: center;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.25rem;
     text-transform: none;
     text-decoration: none;
     color: black;

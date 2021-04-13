@@ -1,43 +1,101 @@
 import {useState, useEffect} from 'react'
-import {Card, Form, Col, Button} from 'react-bootstrap'
+import {Card, Form, Col, Button, ListGroup} from 'react-bootstrap'
+import {Redirect} from 'react-router-dom'
 import {useCartContext} from '../../context/cartContext'
 import {getFirestore} from '../../config/firebase'
+import firebase from 'firebase/app' 
+import provincias from '../../config/provincias.json'
 import './Checkout.css'
 
 const Checkout = () => {   
     //context
-    const { cart, cartSize } = useCartContext()
-    console.log(cart)
+    const { cart, cartSize, clearCart } = useCartContext()
+
     //State Hooks
     const [validated, setValidated] = useState(false);
+    const [order, setOrder] = useState(undefined);
 
     //useEffect - creacion de la orden ? render "gracias por tu compra" : render "Hubo un error al generar la orden"
+    /* useEffect(() => {
+        
+    }, [order]); */
 
+    //HACER QUE AL GENERARSE UNA ORDEN DISMINUYA EL STOCK EN FIREBASE
+
+    //HACER UNA RUTA A LA QUE SE REDIRIJA EL USUARIO AL GENERARSE LA ORDEN PARA MOSTRAR EL CONTENIDO 
+    // '/order/:orderId'
+
+    //AMPLIAR EL README, AGREGAR INSTALACION DE NODE Y DEL REPO
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
-
-
+        e.stopPropagation()
+        let form = e.target
         setValidated(true);
-    }
 
-    /* 
-    const OrderDetail = () => {
-        return (
-            <h3>Su pedido ha sido realizado</h3>
-        )
-    }
+        if(form.checkValidity()){
+            const newOrder = {
+                user: {
+                    name: document.getElementById("formName").value + ' ' + document.getElementById("formSurname").value,
+                    email: document.getElementById("formEmail").value,
+                    phone: document.getElementById("formPhone").value,
+                    address: document.getElementById("formAddress").value,
+                    address_2: document.getElementById("formAddress2").value,
+                    city: document.getElementById("formCity").value,
+                    state: document.getElementById("formState").value,
+                    zip: document.getElementById("formZip").value
+                },
+                products: [...cart],
+                //el acumulador arranca en 500 simluando el precio de envío
+                total: cart.reduce((runningTotal, order) => runningTotal + order.item.price * order.quantity ,500),
+                createOn: firebase.firestore.Timestamp.fromDate(new Date())
+            }
+            const db = getFirestore()
+            const orders = db.collection("orders")
+            
+            orders.add(newOrder)
+            .then((resp) => {
+                setOrder({
+                    id: resp.id, 
+                    details: newOrder
+                }) 
 
-    */
+                clearCart()
+            })
+            .catch((err) => setOrder({
+                id: undefined,
+                details: err
+                }
+            ))
+        }        
+    }   
 
     const BillingInfoForm = () => {
         return (
             <Card className="CheckoutFormContainer">
                 <h3>Datos de facturación</h3>
                 <Form noValidate validated={validated} className={validated ? "was-validated" : "not-validated" } onSubmit={(e) => handleSubmit(e)}>
+                    
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Group as={Col} controlId="formName">
+                        <Form.Label>Nombre</Form.Label>
+                        <Form.Control required type="text" placeholder="Nombre" hasValidation/>
+                            <Form.Control.Feedback type="invalid">
+                                Indique su nombre.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formSurname">
+                        <Form.Label>Apellido</Form.Label>
+                        <Form.Control required type="text" placeholder="Apellido" hasValidation/>
+                            <Form.Control.Feedback type="invalid">
+                                Indique su apellido.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+                    
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control required type="email" placeholder="usuario@gmail.com" hasValidation/>
                             <Form.Control.Feedback type="invalid">
@@ -45,16 +103,16 @@ const Checkout = () => {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridPassword">
+                        <Form.Group as={Col} controlId="formPhone">
                         <Form.Label>Teléfono</Form.Label>
                         <Form.Control required type="tel" pattern="[0-9+-]{8,14}" maxLength={14} placeholder="Teléfono"/>
                             <Form.Control.Feedback type="invalid">
-                                Teléfono no válido.
+                                Ingrese un número entre 4 y 14 dígitos.
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>
 
-                    <Form.Group controlId="formGridAddress1">
+                    <Form.Group controlId="formAddress">
                         <Form.Label>Dirección</Form.Label>
                         <Form.Control required placeholder="Av. Siempreviva 742" />
                         <Form.Control.Feedback type="invalid">
@@ -62,14 +120,14 @@ const Checkout = () => {
                         </Form.Control.Feedback>   
                     </Form.Group>
 
-                    <Form.Group controlId="formGridAddress2">
+                    <Form.Group controlId="formAddress2">
                         <Form.Label>Dirección 2</Form.Label>
                         <Form.Control placeholder="Piso, departamento, lote" />
                     </Form.Group>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridCity">
-                        <Form.Label>Ciudad</Form.Label>
+                        <Form.Group as={Col} controlId="formCity">
+                        <Form.Label>Ciudad/Localidad</Form.Label>
                         <Form.Control required placeholder="Ciudad"/>
                         <Form.Control.Feedback type="invalid">
                             Indique ciudad o localidad.
@@ -78,39 +136,18 @@ const Checkout = () => {
 
                         <Form.Group as={Col}>
                         <Form.Label>Provincia</Form.Label>
-                        <Form.Control required as="select" className="form-select" id="SelectProvince" defaultValue="">
+                        <Form.Control required as="select" className="form-select" id="formState" defaultValue="">
                             <option disabled value="">Seleccionar...</option>
-                            <option value="BA">Buenos Aires</option>
-                            <option value="CF">Capital Federal</option>
-                            <option value="CA">Catamarca</option>
-                            <option value="CH">Chaco</option>
-                            <option value="CT">Chubut</option>
-                            <option value="CO">Córdoba</option>
-                            <option value="CR">Corrientes</option>
-                            <option value="ER">Entre Ríos</option>
-                            <option value="FO">Formosa</option>
-                            <option value="JU">Jujuy</option>
-                            <option value="LP">La Pampa</option>
-                            <option value="LR">La Rioja</option>
-                            <option value="ME">Mendoza</option>
-                            <option value="MI">Misiones</option>
-                            <option value="NE">Neuquén</option>
-                            <option value="RN">Río Negro</option>
-                            <option value="SA">Salta</option>
-                            <option value="SJ">San Juan</option>
-                            <option value="SL">San Luis</option>
-                            <option value="SC">Santa Cruz</option>
-                            <option value="SF">Santa Fe</option>
-                            <option value="SE">Santiago del Estero</option>
-                            <option value="TF">Tierra del Fuego</option>
-                            <option value="TU">Tucumán</option>
+                            {
+                                provincias.data.map((provincia, i) => <option key={i}>{provincia.name}</option>)
+                            }
                         </Form.Control>
                             <Form.Control.Feedback type="invalid">
                                 Seleccione una provincia.
                             </Form.Control.Feedback>    
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridZip">
+                        <Form.Group as={Col} controlId="formZip">
                         <Form.Label>Código Postal</Form.Label>
                         <Form.Control required type="tel" pattern="[0-9]{4}" maxLength={4}/>
                         <Form.Control.Feedback type="invalid">
@@ -127,9 +164,17 @@ const Checkout = () => {
         )
     }
 
+
     return (
         <div className="Checkout">
-            <BillingInfoForm />
+            {
+                order === undefined 
+                ?
+                <BillingInfoForm />
+                :
+                <Redirect to={`/order/${order.id}`}/>
+            }
+            
         </div>
     )
 }
