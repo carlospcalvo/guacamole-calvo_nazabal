@@ -60,7 +60,6 @@ const Checkout = () => {
                     .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => itemCollection.doc(doc.id).update(stockUpdate))
                     })
-                    .then(console.log("[Checkout] Stock updated succesfully"))
                     .catch((err) => {
                     console.log("[Checkout] Error updating stock ", err)
                     })
