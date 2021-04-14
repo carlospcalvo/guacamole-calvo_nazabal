@@ -15,8 +15,6 @@ const Checkout = () => {
     const [validated, setValidated] = useState(false);
     const [order, setOrder] = useState(undefined);
 
-    //HACER QUE AL GENERARSE UNA ORDEN DISMINUYA EL STOCK EN FIREBASE
-
     //AMPLIAR EL README, AGREGAR INSTALACION DE NODE Y DEL REPO
 
     const handleSubmit = (e) => {
@@ -172,16 +170,9 @@ const Checkout = () => {
         )
     }
 
-
     return (
         <div className="Checkout">
-            {
-                order === undefined 
-                ?
-                <BillingInfoForm />
-                :
-                <Redirect to={`/order/${order.id}`}/>
-            }
+            { order === undefined ? <BillingInfoForm/> : <Redirect to={`/order/${order.id}`}/> }
         </div>
     )
 }
