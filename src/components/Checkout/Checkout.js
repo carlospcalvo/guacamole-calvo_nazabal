@@ -44,6 +44,7 @@ const Checkout = () => {
             }
             const db = getFirestore()
             const orders = db.collection("orders")
+            const itemCollection = db.collection('items')
             
             orders.add(newOrder)
             .then((resp) => {
@@ -51,6 +52,21 @@ const Checkout = () => {
                     id: resp.id, 
                     details: newOrder
                 }) 
+
+                //Stock update
+                cart.forEach(element => {
+                    let stockUpdate = {}
+                    stockUpdate[`stock_per_size.${element.item.size}`] = firebase.firestore.FieldValue.increment( element.quantity * -1)
+
+                    itemCollection.where("id", "==", element.item.id).get()
+                    .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => itemCollection.doc(doc.id).update(stockUpdate))
+                    })
+                    .then(console.log("[Checkout] Stock updated succesfully"))
+                    .catch((err) => {
+                    console.log("[Checkout] Error updating stock ", err)
+                    })
+                })
 
                 clearCart()
             })
