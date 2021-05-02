@@ -64,7 +64,7 @@ const SignUp = ({location}) => {
                     </Card.Body>
                 </Card>
                 <div className="w-100 text-center mt-2">
-                    ¿Ya tenés una cuenta? <Link to={{pathname: "/login", state: { fromCart: location.state.fromCart }}}>Ingresar</Link>
+                    ¿Ya tenés una cuenta? <Link to={{pathname: "/login", state: { fromCart: location.state.fromCart }}} style={{color: "blue"}}>Ingresar</Link>
                 </div>
             </div>
         </Container>            

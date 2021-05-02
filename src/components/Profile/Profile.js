@@ -57,7 +57,7 @@ const Profile = ({location}) => {
             console.log("[Profile] Error retrieving wishlist.", err)
         })
         setLoading(false)
-    },[]);
+    },[currentUser]);
 
     //Helpers
     const handleSelect = (key) => {

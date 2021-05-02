@@ -1,6 +1,7 @@
 body {
   margin: 0;
-  font-family: 'Brandon Grotesque Regular', sans-serif;
+  /* font-family: 'Brandon Grotesque Regular', sans-serif; */
+  font-family: 'Overlock', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,5 +11,6 @@ body {
 } */
 
 code {
-  font-family: 'Brandon Grotesque Regular', sans-serif;
+  /* font-family: 'Brandon Grotesque Regular', sans-serif; */
+  font-family: 'Overlock', cursive;
 }

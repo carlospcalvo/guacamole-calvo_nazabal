@@ -54,12 +54,12 @@ const Login = ({location}) => {
                             <Button disabled={loading} style={{backgroundColor: "#e25a00"}} type="submit" block>Ingresar</Button>
                         </Form>
                         <div className="w-100 text-center mt-3">
-                            <Link to="/recover-password">Olvidé mi contraseña</Link>
+                            <Link to="/recover-password" style={{color: "blue"}}>Olvidé mi contraseña</Link>
                         </div>
                     </Card.Body>
                 </Card>
                 <div className="w-100 text-center mt-2">
-                    ¿Aún no tenés tu cuenta? <Link to="/registrate">Registrate</Link>
+                    ¿Aún no tenés tu cuenta? <Link to="/registrate" style={{color: "blue"}}>Registrate</Link>
                 </div>
             </div>
         </Container> 

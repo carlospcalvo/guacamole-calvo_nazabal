@@ -36,20 +36,23 @@ const ItemDetail = (props) => {
 
     //Effects
     useEffect(() => {
-        const db = getFirestore()
-        const wishlist = db.collection("wishlists")
-        setLoading(true)
+        if(currentUser){
+            const db = getFirestore()
+            const wishlist = db.collection("wishlists")
+            setLoading(true)
+            
+            wishlist.doc(currentUser.uid).get()
+            .then((docRef) => {            
+                if(docRef.exists){
+                    setWishlistItems([...docRef.data().items.map(item => item.id)])
+                }
+            })
+            .catch((err) => {
+                console.log("[ItemDetail] Error fetching wishlist.", err)
+            })               
+            setLoading(false)
+        }
         
-        wishlist.doc(currentUser.uid).get()
-        .then((docRef) => {            
-            if(docRef.exists){
-                setWishlistItems([...docRef.data().items.map(item => item.id)])
-            }
-        })
-        .catch((err) => {
-            console.log("[ItemDetail] Error fetching wishlist.", err)
-        })               
-        setLoading(false)
     }, [currentUser, id]);
 
     //Helpers

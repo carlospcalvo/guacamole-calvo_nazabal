@@ -1,7 +1,8 @@
 .CartListItemContainer{
     display: flex;
     justify-content: center;
-    font-family: 'Brandon Grotesque Regular', sans-serif;
+    /* font-family: 'Brandon Grotesque Regular', sans-serif; */
+    font-family: 'Overlock', cursive;
 }
 
 .CartListItem{

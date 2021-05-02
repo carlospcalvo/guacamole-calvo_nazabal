@@ -1,6 +1,7 @@
  html{
   /* font-family: "Roboto", Sans-serif; */
-  font-family: 'Brandon Grotesque Regular', sans-serif;
+  /* font-family: 'Brandon Grotesque Regular', sans-serif; */
+  font-family: 'Overlock', cursive;
 }
 
 #main{
@@ -10,7 +11,8 @@
   align-items: center;
   font-family: inherit;
   min-height: 49rem;
-  font-family: 'Brandon Grotesque Regular', sans-serif;
+  /* font-family: 'Brandon Grotesque Regular', sans-serif; */
+  font-family: 'Overlock', cursive;
 }
 
 #logo{
