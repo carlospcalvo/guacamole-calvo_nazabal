@@ -27,7 +27,7 @@ Instalar las dependencias
 Iniciar el servidor
 
 ```bash
-  npm run start
+  npm start
 ```
 
 ## Librerías utilizadas
