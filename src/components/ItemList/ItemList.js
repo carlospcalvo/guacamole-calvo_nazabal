@@ -3,8 +3,7 @@ import Item from '../Item/Item'
 import './ItemList.css'
 
 const ItemList = ({items, category}) => {
-   
-    //Conditional rendering
+    
     if(items.length === 0){
        return <ItemListSkeleton/>  
     } else {

@@ -6,13 +6,13 @@ import logo from '../../images/guacamole-logo.png';
 import './ItemListContainer.css'
 
 const ItemListContainer = ({greeting}) => {     
-    //params
+    //Location
     let {categoryId} = useParams()
         
-    //State Hooks
+    //State
     const [items, setItems] = useState([]);
     
-    //Effect Hooks
+    //Effect
     useEffect(() => {        
         const db = getFirestore()
         const itemCollection = db.collection('items')
@@ -22,34 +22,46 @@ const ItemListContainer = ({greeting}) => {
             itemCollection.where("category", "==", categoryId).get()
             .then((querySnapshot) => {
                 if(querySnapshot.size === 0){
-                    console.log('[ItemList] No results')
+                    console.log('[ItemListContainer] No results')
                 } 
-                setItems(querySnapshot.docs.map(doc => doc.data()))
+                setItems(querySnapshot.docs.map(doc => {
+                    return {
+                        uid: doc.id,
+                        ...doc.data()
+                    }    
+                }))
             })
             .catch((err) => {
-            console.log("[ItemList] Error searching items ", err)
+                console.log("[ItemList] Error searching items ", err)
             })
         } else {
             setItems([])
             itemCollection.get()
             .then((querySnapshot) => {
                 if(querySnapshot.size === 0){
-                    console.log('[ItemList] No results')
+                    console.log('[ItemListContainer] No results')
                 } 
-                setItems(querySnapshot.docs.map(doc => doc.data()))
+                setItems(querySnapshot.docs.map(doc => {
+                    return {
+                        uid: doc.id,
+                        ...doc.data()
+                    }    
+                }))
             })
             .catch((err) => {
-            console.log("[App] Error searching items ", err)
+                console.log("[App] Error searching items ", err)
             })
         }
         
     }, [categoryId]);   
 
+    //Helpers
     const HomeBanner = <>
         <img id="logo" src={logo} alt="logo"/>
         <h4 className="greeting">{greeting}</h4>
     </>
     
+
     return(
         <div className= "itemListContainer">
             {greeting ?  HomeBanner : null }

@@ -1,0 +1,8 @@
+.tab-content{
+    width: 100%;
+    flex-direction: column;
+}
+
+.btn-link{
+    color: black;
+}

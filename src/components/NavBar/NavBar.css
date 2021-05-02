@@ -29,25 +29,38 @@ a, .navbar-nav, .navbar-light .nav-link {
     justify-content: space-evenly;
 }
 
-/* .NavDropDown{
-    background-color: #c0392b; 
-    /* color:rgb(255, 255, 255); 
-} */
-
 div.dropdown-menu.show {
     background-color: #c0392b;
 }
-a.dropdown-item {
+a.dropdown-item, a.dropdown-item:visited{
+    background-color: #c0392b;
     color: white;  
+}
+
+a.dropdown-item:hover{
+    background-color: #91261a;
+    color: white; 
 }
 
 .dropdown-item:active{
     background-color: #75231a!important;
 }
 
+#ProfileMenu{
+    background-color: #c0392b;
+    border: none;
+    max-width: 3.5rem;
+    max-height: 2rem;
+    margin: 10px;
+    margin-left: 5px;
+    margin-bottom: 1rem; 
+    vertical-align: middle;
+}
+
 #CartBadge{
     float: right;
     border-radius: 3rem;
-    margin-left: 1rem;
+    margin-left: -10px;
     margin-bottom: -3rem;
+    height: 1.1rem
 }

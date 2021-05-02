@@ -3,9 +3,10 @@ import ItemSkeleton from '../ItemSkeleton/ItemSkeleton'
 import {useParams} from 'react-router-dom'
 
 const ItemListSkeleton = () => {
-    //params
-    let {categoryId} = useParams()
+    //Misc
     let cards = [0,1,2,3] //cantidad de skeleton cards a renderizar
+    //Location
+    let {categoryId} = useParams()
 
     return (
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: "2rem"}}>

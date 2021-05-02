@@ -1,0 +1,8 @@
+.ItemNotFound{
+    display:flex;
+    flex-direction: column;
+}
+
+h1{
+    margin: 2rem;
+}

@@ -5,7 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import {useCartContext} from '../../context/cartContext'
 
 const CartWidget = (props) => {
-    //context
+    //Cart Context
     let {cartSize} = useCartContext()
 
     //styles
@@ -15,13 +15,16 @@ const CartWidget = (props) => {
         borderColor: borderColor, 
         maxWidth: "3rem", 
         padding: "0", 
-        margin: "10px",
+        marginTop: "10px",
+        marginRight: "10px",
         marginLeft: "5px"
     }
+    
     return (
         <Button as={Link} to="/cart" variant='danger' style={buttonStyle}>
-            <Badge variant="warning" id="CartBadge">{cartSize}</Badge>
-            <FaShoppingCart size={28}/>
+            <FaShoppingCart size={30} style={{margin:"auto"}}/>
+            {cartSize > 0 && <Badge variant="warning" id="CartBadge">{cartSize}</Badge>}
+            
         </Button>
     )
 }

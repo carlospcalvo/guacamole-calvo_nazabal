@@ -1,19 +1,24 @@
 import {useState, useEffect} from 'react'
-import {Card, Form, Col, Button, ListGroup} from 'react-bootstrap'
+import {Card, Button, ListGroup} from 'react-bootstrap'
 import {Link, useParams} from 'react-router-dom'
 import {getFirestore} from '../../config/firebase'
 import './OrderDetail.css'
 
 const OrderDetail = () => {
+    //Location
     const { id } = useParams()
+    
     //State
     const [order, setOrder] = useState(undefined);    
+    const [loading, setLoading] = useState(false);
+
     //Effects
     useEffect(() => {
         if(id){
             const db = getFirestore()
             const orderCollection = db.collection('orders')
     
+            setLoading(true)
             orderCollection.doc(id).get()
             .then((docRef) => {
                 setOrder(docRef.data())
@@ -21,11 +26,9 @@ const OrderDetail = () => {
             .catch((err) => {
             console.log("[OrderDetail] Error searching items ", err)
             })
+            setLoading(false)
         } 
     }, [id]);
-
-
-    console.log(order)
 
     return (
         <div className="Checkout">
@@ -59,7 +62,7 @@ const OrderDetail = () => {
                 </> 
                 :
                 <>
-                    <h3>Hubo un error al generar su pedido, intente nuevamente.</h3>
+                    {!loading ? <h3>Cargando...</h3> : <h3>Hubo un error al generar su pedido, intente nuevamente.</h3>}
                 </>
             }
             

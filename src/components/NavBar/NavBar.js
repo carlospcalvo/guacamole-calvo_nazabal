@@ -1,16 +1,50 @@
-import React from 'react';
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
-import {FaSearch} from 'react-icons/fa'
+import {useState, useEffect} from 'react';
+import { Nav, Navbar, NavDropdown, Form, FormControl, Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import {Link, useHistory} from 'react-router-dom'
+import {FaSearch, FaUserAlt} from 'react-icons/fa'
 import CartWidget from '../CartWidget/CartWidget'
-import {useCartContext} from '../../context/cartContext'
+import {useAuth} from '../../context/AuthContext'
+import {getFirestore} from '../../config/firebase'
 import './NavBar.css'
 
 const NavBar = () => {
-  let {cartSize} = useCartContext()
+  //Auth
+  const {currentUser, logout} = useAuth()
+  
+  //Location
+  const history = useHistory()
 
+  //State
+  const [categories, setCategories] = useState([]);
 
-  //HACER EL NAVBAR DINAMICO CON UN JSON
+  //Effect
+  useEffect(() => {
+    const db = getFirestore()
+    const categoryCollection = db.collection('categories')
+
+    categoryCollection.get()
+    .then((querySnapshot) => {
+        if(querySnapshot.size !== 0){
+            setCategories(querySnapshot.docs.map(doc => doc.data()))
+        } else {
+            console.log("[Categories] No categories ")
+        }        
+    })
+    .catch((err) => {
+        console.log("[Categories] Error searching categories ", err)
+    })
+
+  }, []);
+
+  //Helpers
+  const handleLogout = async () => {
+    try{
+      await logout()
+      history.push('/login')
+    }  catch {
+      console.log("User could not log out.")
+    }
+  } 
   
   return (
     <Navbar id='navbar' expand="xl" variant="dark">
@@ -20,11 +54,9 @@ const NavBar = () => {
         <Nav className="mr-auto">
           <NavDropdown className="NavDropDown" title="Productos" id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/">Todos los productos</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/category/nenas">Nenas</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/category/pre-teens">Pre Teens</NavDropdown.Item>
-            <NavDropdown.Item as={Link} to="/category/chiquititas">Chiquititas</NavDropdown.Item>
-            {/* TODAVIA NO HAY MATERIAL <NavDropdown.Item as={Link} to="/category/varones">Varones</NavDropdown.Item> */}
-            <NavDropdown.Item as={Link} to="/sale">Sale</NavDropdown.Item>
+            {
+              categories ? categories.map((category, i) => <NavDropdown.Item as={Link} to={`/category/${category.key}`} key={i}>{category.description}</NavDropdown.Item>) : null
+            }
           </NavDropdown>
           <Nav.Link as={Link} to="/sale">Sale</Nav.Link>
           <Nav.Link as={Link} to="/ayuda">Cómo comprar</Nav.Link>
@@ -35,13 +67,32 @@ const NavBar = () => {
           <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
         </Nav>
         <Nav id='nav-right'>
+
+          <DropdownButton
+            menuAlign="left"
+            title={<FaUserAlt style={{color: 'white', verticalAlign: "middle"}}/>}
+            variant="light" 
+            id="ProfileMenu"
+          >
+              {
+                currentUser ? 
+                <>
+                  <Dropdown.ItemText style={{color:"white", textTransform:"none", fontStyle: "italic"}}>{currentUser.email}</Dropdown.ItemText>
+                  <Dropdown.Item as={Link} to={{pathname: "/perfil", state: { target: 'compras' }}}>Mi perfil</Dropdown.Item>
+                  <Dropdown.Item as={Link} to={{pathname: "/perfil", state: { target: 'favoritos' }}}>Favoritos</Dropdown.Item>
+                  <Dropdown.Item onClick={handleLogout}>Salir</Dropdown.Item>
+                </>
+                :
+                <Dropdown.Item as={Link} to="/login">Ingresar</Dropdown.Item>
+              }
+          </DropdownButton>
           <Form id='navbar-search' inline>
-            <FormControl type="text" size="sm" placeholder="Buscar..." className="mr-sm-2" />
+            <FormControl type="text" size="sm" placeholder="Buscar..." className="mr-sm-2" style={{borderRadius: "2rem"}} />
             <Button size="sm" variant="light">
-              <FaSearch style={{color: '#c0392b'}}/>  
+              <FaSearch style={{color: '#c0392b', paddingBottom: ".1rem"}}/>  
             </Button>       
           </Form>
-          { cartSize > 0 && <CartWidget backgroundColor='#c0392b' borderColor='#c0392b'/> }
+          <CartWidget backgroundColor='#c0392b' borderColor='#c0392b'/>
         </Nav>      
       </Navbar.Collapse>
     </Navbar>

@@ -1,26 +1,56 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Image, Card, ListGroup, Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import ItemStockDetail from '../ItemStockDetail/ItemStockDetail'
 import ItemCount from '../ItemCount/ItemCount'
 import {useCartContext} from '../../context/cartContext'
+import {useAuth} from '../../context/AuthContext'
+import {getFirestore} from '../../config/firebase'
+import firebase from 'firebase/app' 
 import './ItemDetail.css'
 
 const ItemDetail = (props) => {
     //props
-    const {id, title, description, price, pictureUrl, sizes, stock_per_size, materials} = props.item[0]
-    //images
+    const {id, title, description, price, pictureUrl, sizes, stock_per_size, materials} = props.item
+    const itemUid = props.itemUid
     const requestImageFile = require.context('../../images/items', true, /.jpeg$/);
     const imgUrl = requestImageFile(`./${pictureUrl}.jpeg`).default
     
     //Context
     const cartContext = useCartContext()
 
+    //Auth
+    const {currentUser} = useAuth()
+
+    //Location
+    const history = useHistory()    
+
     //State Hooks
-    const [stockActual, setStockActual] = useState(-1);
-    const [selectedSize, setSelectedSize] = useState(0);
-    const [stockPerSize, setStockPerSize] = useState(stock_per_size);
-    const [hideCartBtn, setHideCartBtn] = useState(true);
+    const [stockActual, setStockActual] = useState(-1)
+    const [previousSize, setPreviousSize] = useState()
+    const [selectedSize, setSelectedSize] = useState(0)
+    const [stockPerSize, setStockPerSize] = useState(stock_per_size)
+    const [hideCartBtn, setHideCartBtn] = useState(true)
+    const [wishlistItems, setWishlistItems] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    //Effects
+    useEffect(() => {
+        const db = getFirestore()
+        const wishlist = db.collection("wishlists")
+        setLoading(true)
+        
+        wishlist.doc(currentUser.uid).get()
+        .then((docRef) => {            
+            if(docRef.exists){
+                setWishlistItems([...docRef.data().items.map(item => item.id)])
+            }
+        })
+        .catch((err) => {
+            console.log("[ItemDetail] Error fetching wishlist.", err)
+        })               
+        setLoading(false)
+    }, [currentUser, id]);
 
     //Helpers
     const restarStock = (e, pedido) => {
@@ -48,6 +78,47 @@ const ItemDetail = (props) => {
     const selectSize = (e) => {
         setSelectedSize(e.target.value)
         setStockActual(stockPerSize[e.target.value])
+        
+        if(previousSize) {
+            previousSize.className = previousSize.className.substring( 0, previousSize.className.indexOf("active"))
+            previousSize.blur()
+        }
+        e.target.className += ' active'
+        e.target.focus()
+        setPreviousSize(e.target)
+    }
+
+    const addToWishlist = () => {
+        
+        if(!currentUser){
+            if(window.confirm("Para agregar a favoritos debes loguearte. ¿Quieres ingresar?")){
+                history.push("/login")
+            }
+        } else {
+            const db = getFirestore()
+            const wishlist = db.collection("wishlists").doc(currentUser.uid)
+            setLoading(true)
+
+            if(wishlistItems.includes(itemUid)){
+                wishlist.update({"items": firebase.firestore.FieldValue.arrayRemove({"id":itemUid, "size": selectedSize})})
+                setWishlistItems(wishlistItems.filter(item => item !== itemUid))
+            } else {
+                if(wishlistItems.length > 0){
+                    wishlist.update({items: firebase.firestore.FieldValue.arrayUnion({"id":itemUid, "size": selectedSize})})
+                    setWishlistItems([...wishlistItems, itemUid])
+                } else {
+                    wishlist.set({
+                         uid: currentUser.uid,
+                         items: [{
+                            "id": itemUid,
+                            "size": selectedSize
+                        }]
+                    })
+                    setWishlistItems([itemUid])
+                }        
+            }
+            setLoading(false)
+        }
     }
     
     const Counter = () => {
@@ -76,6 +147,7 @@ const ItemDetail = (props) => {
                                     <ItemStockDetail onClick={selectSize} stock={stockActual} sizes={sizes} />                                 
                                 </ListGroup.Item>
                                 <ListGroup.Item id="ItemDetailCartBtn">
+                                    <Button hidden={selectedSize === 0} disabled={loading} variant="warning" id="ItemDetailAddToFavs" onClick={addToWishlist}>{!wishlistItems.includes(itemUid) ? "Agregar a" : "Quitar de"} favoritos</Button>
                                     <Counter/>
                                     <Button hidden={hideCartBtn} as={Link} to="/cart" variant="warning" id="ItemDetailGoToCartBtn">Ir al carrito</Button>
                                 </ListGroup.Item>    

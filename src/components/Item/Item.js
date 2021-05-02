@@ -3,14 +3,14 @@ import {Card} from 'react-bootstrap'
 import './Item.css'
 
 const Item = (props) => {
-    //props
-    const {id, title, description, price, pictureUrl} = props.item
+    //Props
+    const {uid, title, description, price, pictureUrl} = props.item
     const requestImageFile = require.context('../../images/items', true, /.jpeg$/);
     const imgUrl = requestImageFile(`./${pictureUrl}.jpeg`).default
     
     return (
         <>
-            <Link to={`/item/${id}`} className='ItemContainer' >
+            <Link to={`/item/${uid}`} className='ItemContainer' >
                 <Card className='ItemContainer'>
                     <Card.Img className="ItemImage" variant="top" src={imgUrl} alt={title}/>
                     <Card.Body className="ItemBody">
