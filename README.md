@@ -2,6 +2,10 @@
 
 Sitio E-commerce de ropa para niñas (y niños próximamente).
 
+## Demo
+
+![Demo](https://res.cloudinary.com/carlospcalvo/video/upload/v1619927816/guacamole/React_-_Entrega_Final_-_Carlos_Calvo_Naz%C3%A1bal_dchyig.mp4
+
 ## Correr el proyecto localmente
 
  Instalar Node.js : https://nodejs.org/dist/v16.0.0/node-v16.0.0-x64.msi
