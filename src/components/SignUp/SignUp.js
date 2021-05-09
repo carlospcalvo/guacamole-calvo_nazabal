@@ -33,8 +33,22 @@ const SignUp = ({location}) => {
             setLoading(true)
             await signUp(emailRef.current.value, passwordRef.current.value)
             location?.state?.fromCart ? history.push("/checkout") : history.goBack()
-        } catch {
-            setError("Hubo un error al crear tu usuario, intenta nuevamente.")
+        } catch (error) {
+            console.log(error)
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    setError('Ya existe una cuenta asociada con ese email.')
+                    break;
+                case 'auth/invalid-email':
+                    setError('Email no válido.')
+                    break;
+                case 'auth/weak-password':
+                    setError('Su contraseña debe tener como mínimo 6 caracteres.')
+                    break;
+                default:
+                    setError(error.message)
+                    break;
+            }
         }
         setLoading(false)
     }   
@@ -64,7 +78,7 @@ const SignUp = ({location}) => {
                     </Card.Body>
                 </Card>
                 <div className="w-100 text-center mt-2">
-                    ¿Ya tenés una cuenta? <Link to={{pathname: "/login", state: { fromCart: location.state.fromCart }}} style={{color: "blue"}}>Ingresar</Link>
+                    ¿Ya tenés una cuenta? <Link to={{pathname: "/login", state: { fromCart: location?.state?.fromCart ? true : false }}} style={{color: "blue"}}>Ingresar</Link>
                 </div>
             </div>
         </Container>            

@@ -14,7 +14,7 @@ const Profile = ({location}) => {
     //State
     const [userData, setUserData] = useState({})
     const [items, setItems] = useState([])
-    const [selectedTab, setSelectedTab] = useState(location.state.target || 'compras')
+    const [selectedTab, setSelectedTab] = useState(location.state.target ?? 'compras')
     const [loading, setLoading] = useState(false)    
 
     //Effect

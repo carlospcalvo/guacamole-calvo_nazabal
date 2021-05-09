@@ -28,8 +28,25 @@ const Login = ({location}) => {
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
             location?.state?.fromCart ? history.push('/checkout') : history.push('/')
-        } catch {
-            setError("Hubo un error en el login, intenta nuevamente.")
+        } catch(error) {
+            switch (error.code) {
+                case 'auth/invalid-email':
+                    setError("Email no válido.")    
+                    break;
+                case 'auth/user-disabled':
+                    setError('Su usuario ha sido inhabilitado.')
+                    break;
+                case 'auth/user-not-found':
+                    setError('El usuario no existe.')
+                    break;
+                case 'auth/wrong-password':
+                    setError('Contraseña incorrecta.')
+                    break;
+                default:
+                    setError(error.message)
+                    break;
+            }
+            
         }
         setLoading(false)
         
@@ -64,7 +81,6 @@ const Login = ({location}) => {
             </div>
         </Container> 
     )
-
 }
 
 export default Login
